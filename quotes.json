@@ -1,0 +1,29 @@
+{
+    "verses": [
+        {
+            "reference": "John 3:16",
+            "text": "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.",
+            "meaning": "This verse summarizes the core of Christian belief, emphasizing God's love and the promise of eternal life through faith in Jesus Christ."
+        },
+        {
+            "reference": "Matthew 5:16",
+            "text": "In the same way, let your light shine before others, that they may see your good deeds and glorify your Father in heaven.",
+            "meaning": "Jesus encourages believers to live exemplary lives, showing God's goodness through their actions, which brings glory to God."
+        },
+        {
+            "reference": "Luke 6:31",
+            "text": "Do to others as you would have them do to you.",
+            "meaning": "Known as the Golden Rule, this verse teaches treating others with kindness and fairness, reflecting Jesus' teachings on love and compassion."
+        },
+        {
+            "reference": "Mark 12:30-31",
+            "text": "Love the Lord your God with all your heart and with all your soul and with all your mind and with all your strength. The second is this: Love your neighbor as yourself. There is no commandment greater than these.",
+            "meaning": "Jesus summarizes the commandments into these two greatest commands, emphasizing the centrality of love for God and love for others."
+        },
+        {
+            "reference": "John 14:6",
+            "text": "Jesus answered, 'I am the way and the truth and the life. No one comes to the Father except through me.'",
+            "meaning": "Jesus declares himself as the exclusive path to God, emphasizing faith in him as the only means of salvation and eternal life."
+        }
+    ]
+}

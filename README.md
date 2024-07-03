@@ -5,7 +5,7 @@ Hey there! Welcome to **VideoAutomation**! This project is all about making **Sh
 ## Features
 
 - 🌐 **Image Fetching:** Grabs images from the web based on chosen topic.
-- 🎤 **Text-to-Speech (TTS):** Creates audio clips using TTS.
+- 🎤 **Text-to-Speech (TTS):** Creates audio clips from your script using TTS.
 - ✏️ **Text Overlay:** Adds captions to the video.
 - 🎬 **Video Creation:** Brings together images, text, and audio into a polished video.
 

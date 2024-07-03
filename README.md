@@ -1,6 +1,6 @@
 # VideoAutomation
 
-Hey there! Welcome to **VideoAutomation**! 🎉 This project is all about making **Short video creation** super easy by automatically combining images, text, and audio into awesome videos. 
+Hey there! Welcome to **VideoAutomation**! This project is all about making **Short video creation** super easy by automatically combining images, text, and audio into awesome videos. 
 
 ## Features
 

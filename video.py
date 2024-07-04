@@ -136,35 +136,44 @@ def generate_tts_audio(text, filename):
         print(f"Error occurred: {tts.status_code}")
 
 
-def create_video(slide_paths, audio_paths, audio_durations, output_path="output_video.mp4", music_path='./music/emotional-music.mp3'):
-    clips = []
+def create_video(slide_paths, audio_paths, audio_durations, output_path="output_video.mp4", music_path='./music/emotional-music2.mp3', padding=1):
+    video_clips = []
+    
     for slide_path, audio_path, audio_duration in zip(slide_paths, audio_paths, audio_durations):
         try:
             slide_duration = audio_duration
-            clip = ImageClip(slide_path).set_duration(slide_duration)
+            clip = VideoFileClip(slide_path).set_duration(slide_duration)
             audio = AudioFileClip(audio_path).subclip(0, min(slide_duration, audio_duration))
             clip = clip.set_audio(audio)
-            clips.append(clip)
+            video_clips.append(clip)
         except OSError as e:
             print(f"Error processing {slide_path} or {audio_path}: {e}")
             continue
 
-    if not clips:
+    if not video_clips:
         print("No valid clips to create the video.")
         return
 
-    video = concatenate_videoclips(clips, method="compose")
+    # cross-fade-in
+    video_fx_list = [video_clips[0]]
+    idx = video_clips[0].duration - padding
+    
+    for video in video_clips[1:]:
+        video_fx_list.append(video.set_start(idx).crossfadein(padding))
+        idx += video.duration - padding
+
+    final_video = CompositeVideoClip(video_fx_list)
 
     # Add background music
     try:
-        bg_audio = AudioFileClip(music_path).subclip(0, video.duration).fx(afx.volumex, 0.5)
-        new_audio = CompositeAudioClip([video.audio, bg_audio])
-        video = video.set_audio(new_audio)
+        bg_audio = AudioFileClip(music_path).subclip(0, final_video.duration).fx(afx.volumex, 0.5)
+        new_audio = CompositeAudioClip([final_video.audio, bg_audio])
+        final_video = final_video.set_audio(new_audio)
     except OSError as e:
         print(f"Error processing background music: {e}")
 
     try:
-        video.write_videofile(output_path, fps=24)
+        final_video.write_videofile(output_path, fps=24)
     except Exception as e:
         print(f"Error writing video file: {e}")
 
@@ -196,74 +205,70 @@ def save_progress(last_index, progress_file="progress.json"):
 
 
 
-if __name__ == "__main__":
+def create_video_from_script(text, video_title, output_path="output_video.mp4", target_width=1080, target_height=1920):
     API_KEY = os.getenv("IMAGES_API_KEY")
     CSE_ID = os.getenv("IMAGES_CSE_ID")
     
-    # Step 1: quotes
-    with open("quotes.json", "r") as file:
-        quotes = json.load(file)["verses"]
-
-    # last processed indexsss
-    last_index = load_progress()
-    next_index = last_index + 1
-
-    if next_index >= len(quotes):
-        print("No more quotes to process.")
-        exit()
+    # Break input text :)
+    lines = []
+    current_line = ""
+    for char in text:
+        current_line += char
+        if char in ['.', '?', '!', ':']:
+            lines.append(current_line.strip())
+            current_line = ""
+            
+    if current_line:
+        lines.append(current_line.strip())
+        
     
-    quote = quotes[next_index]
-    query = "Jesus God" # TOPIC HERE :)
-    
-    # download images
-    image_urls = fetch_images(query, API_KEY, CSE_ID)
+    # Get images
+    image_urls = fetch_images(video_title, API_KEY, CSE_ID)
     valid_image_paths = download_images(image_urls)
-    
-    if len(valid_image_paths) < 3:
+    random.shuffle(valid_image_paths)
+
+    if len(valid_image_paths) < min(len(lines), 5):
         print("Not enough valid images to create slides.")
-        exit()
+        return "Not enough valid images to create slides."
     
-    target_width, target_height = 1080, 1920  # 9:16 aspect ratio for 1920x1080
     
-    # Step 2: Create slides
-    import random
-
-    array_size = len(valid_image_paths)
-
-    slide_1_image_index = random.randint(0, array_size - 1)
-    slide_2_image_index = random.randint(0, array_size - 1)
-    slide_3_image_index = random.randint(0, array_size - 1)
-    slide_4_image_index = random.randint(0, array_size - 1)
-
-    slides_info = [
-        {"text": random_title_hook, "image": valid_image_paths[slide_1_image_index], "slide": "slide_1.jpg"},
-        {"text": f"Verse: {quote['text']}", "image": valid_image_paths[slide_2_image_index], "slide": "slide_2.jpg"},
-        {"text": f"Meaning: {quote['meaning']}", "image": valid_image_paths[slide_3_image_index], "slide": "slide_3.jpg"},
-        {"text": random_end_slide, "image": valid_image_paths[slide_4_image_index], "slide": "slide_4.jpg"}
-    ]
-
-    for slide_info in slides_info:
+    # Create Slides
+    slides_info = []
+    for idx, line in enumerate(lines):
+        slide_info = {
+            "text": line,
+            "image": valid_image_paths[idx % len(valid_image_paths)],
+            "slide": f"slide_{idx + 1}.jpg"
+        }
+        slides_info.append(slide_info)
         create_slide(slide_info["image"], slide_info["text"], slide_info["slide"], target_width, target_height)
     
-    # TTS audio files
+    
+    # audio
     audio_files = []
     audio_durations = []
+    
     for idx, slide_info in enumerate(slides_info):
         audio_path = f"slide_{idx + 1}.mp3"
         generate_tts_audio(slide_info["text"], audio_path)
         audio_files.append(audio_path)
 
-        # Get the duration of the generated audio
         audio_clip = AudioFileClip(audio_path)
         audio_durations.append(audio_clip.duration)
         audio_clip.close()
 
-    # Step 3: Combine slides
+    # final video
     slide_paths = [slide_info["slide"] for slide_info in slides_info]
-    output_path = f"video{next_index + 1}_bible_quote_with_meaning.mp4"
     create_video(slide_paths, audio_files, audio_durations, output_path)
+
     delete_slides(slide_paths)
     delete_slides(audio_files)
-    
 
-    save_progress(next_index)
+    return output_path
+
+
+if __name__ == "__main__":
+    text = "Your input text goes here. This can be a longer paragraph or multiple sentences."
+    video_title = "Jesus"
+    output_video_path = create_video_from_script(text, video_title, target_width=1920, target_height=1080)
+    print(f"Video created: {output_video_path}")

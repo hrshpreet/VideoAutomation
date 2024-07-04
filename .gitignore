@@ -1,4 +1,10 @@
+.gitignore
 .env
 ytauto/
 images/
 audiotest.py
+*.mp4
+progress.json
+quotes.json
+video2.py
+*.mp3

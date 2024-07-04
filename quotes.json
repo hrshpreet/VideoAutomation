@@ -1,29 +1,74 @@
 {
     "verses": [
         {
-            "reference": "John 3:16",
-            "text": "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.",
-            "meaning": "This verse summarizes the core of Christian belief, emphasizing God's love and the promise of eternal life through faith in Jesus Christ."
+            "reference": "Proverbs 16:3",
+            "text": "Commit to the Lord whatever you do,",
+            "meaning": "and he will establish your plans."
         },
         {
-            "reference": "Matthew 5:16",
-            "text": "In the same way, let your light shine before others, that they may see your good deeds and glorify your Father in heaven.",
-            "meaning": "Jesus encourages believers to live exemplary lives, showing God's goodness through their actions, which brings glory to God."
+            "reference": "Ephesians 3:16-17",
+            "text": "I pray that out of his glorious riches he may strengthen you with power through his Spirit in your inner being, so that Christ may dwell in your hearts through faith.",
+            "meaning": "And I pray that you, being rooted and established in love."
         },
         {
-            "reference": "Luke 6:31",
-            "text": "Do to others as you would have them do to you.",
-            "meaning": "Known as the Golden Rule, this verse teaches treating others with kindness and fairness, reflecting Jesus' teachings on love and compassion."
+            "reference": "Psalm 143:8",
+            "text": "Let the morning bring me word of your unfailing love, for I have put my trust in you.",
+            "meaning": "Show me the way I should go, for to you I entrust my life."
         },
         {
-            "reference": "Mark 12:30-31",
-            "text": "Love the Lord your God with all your heart and with all your soul and with all your mind and with all your strength. The second is this: Love your neighbor as yourself. There is no commandment greater than these.",
-            "meaning": "Jesus summarizes the commandments into these two greatest commands, emphasizing the centrality of love for God and love for others."
+            "reference": "Romans 15:13",
+            "text": "May the God of hope fill you with all joy and peace as you trust in him,",
+            "meaning": "so that you may overflow with hope by the power of the Holy Spirit."
         },
         {
-            "reference": "John 14:6",
-            "text": "Jesus answered, 'I am the way and the truth and the life. No one comes to the Father except through me.'",
-            "meaning": "Jesus declares himself as the exclusive path to God, emphasizing faith in him as the only means of salvation and eternal life."
+            "reference": "Colossians 3:23-24",
+            "text": "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters,",
+            "meaning": "since you know that you will receive an inheritance from the Lord as a reward. It is the Lord Christ you are serving."
+        },
+        {
+            "reference": "Deuteronomy 31:8",
+            "text": "The Lord himself goes before you and will be with you; he will never leave you nor forsake you.",
+            "meaning": "Do not be afraid; do not be discouraged."
+        },
+        {
+            "reference": "Acts 16:31",
+            "text": "They replied, “Believe in the Lord Jesus,",
+            "meaning": "and you will be saved—you and your household.”"
+        },
+        {
+            "reference": "2 Corinthians 5:7",
+            "text": "For we live by faith,",
+            "meaning": "not by sight."
+        },
+        {
+            "reference": "Proverbs 3:5-6",
+            "text": "Trust in the Lord with all your heart and lean not on your own understanding;",
+            "meaning": "in all your ways submit to him, and he will make your paths straight."
+        },
+        {
+            "reference": "Psalm 121:7-8",
+            "text": "The Lord will keep you from all harm— he will watch over your life;",
+            "meaning": "the Lord will watch over your coming and going both now and forevermore."
+        },
+        {
+            "reference": "John 11:25-26",
+            "text": "Jesus said to her, “I am the resurrection and the life. The one who believes in me will live, even though they die;",
+            "meaning": "and whoever lives by believing in me will never die. Do you believe this?”"
+        },
+        {
+            "reference": "Hebrews 11:1",
+            "text": "Now faith is confidence in what we hope for",
+            "meaning": "and assurance about what we do not see."
+        },
+        {
+            "reference": "Ephesians 4:2",
+            "text": "Be completely humble and gentle;",
+            "meaning": "be patient, bearing with one another in love."
+        },
+        {
+            "reference": "Exodus 23:25",
+            "text": "Worship the Lord your God,",
+            "meaning": "and his blessing will be on your food and water. I will take away sickness from among you."
         }
     ]
 }
